@@ -1,35 +1,27 @@
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { Router, RouterOutlet } from '@angular/router';
+import { render } from '@testing-library/angular';
+import { Mock, createMock } from '@testing-library/angular/jest-utils';
+import { MockComponent } from 'ng-mocks';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
+  let routerMock: Mock<Router>;
+
+  beforeEach(() => {
+    routerMock = createMock(Router);
   });
+  function renderComponent(componentProperties: Partial<AppComponent> = {}) {
+    return render(AppComponent, {
+      componentProperties,
+      declarations: [MockComponent(RouterOutlet)],
+      imports: [MatToolbarModule],
+      providers: [{ provide: Router, useValue: routerMock }],
+    });
+  }
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'address-book'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('address-book');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('address-book app is running!');
+    const component = renderComponent({ title: 'Address Book Test' });
+    expect(component).toBeTruthy();
   });
 });
