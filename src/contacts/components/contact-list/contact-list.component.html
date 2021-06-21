@@ -1,0 +1,24 @@
+<app-contact-filter
+  [(filter)]="filter"
+  (filterChange)="handleFilterChange()"
+></app-contact-filter>
+<section *ngIf="contacts$ | async as contacts; else contactListLoading">
+  <div
+    class="clickable"
+    *ngFor="let contact of contacts"
+    (click)="goToContact(contact)"
+  >
+    <img [src]="contact.thumbnailUrl" width="50px" height="50px" />
+    <div>{{ contact.firstName }} {{ contact.lastName }}</div>
+  </div>
+</section>
+
+<ng-template #contactListLoading>
+  <section *ngIf="loadingContacts$ | async; else contactListIssues">
+    Loading
+  </section>
+</ng-template>
+
+<ng-template #contactListIssues>
+  <section>Oh no! Something went wrong.</section>
+</ng-template>
