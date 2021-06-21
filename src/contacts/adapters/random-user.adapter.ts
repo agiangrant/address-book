@@ -23,7 +23,7 @@ export class RandomUserAdapter extends ContactsAdapter {
   getContacts(): Observable<Contact[]> {
     return this._httpClient
       .get<RandomUserResponse>(
-        `${this.config.randomUserBaseUrl}/api?results=50&nat=us,gb,au,fr,es,de,ca,br,nz`
+        `${this.config.randomUserBaseUrl}/api?results=100&nat=us,gb,au,fr,es,de,ca,br,nz`
       )
       .pipe(
         map((data) => {
