@@ -1,0 +1,12 @@
+<section>
+  <mat-icon matPrefix>search</mat-icon>
+  <mat-form-field floatLabel="never">
+    <input
+      matInput
+      [value]="value"
+      (input)="handleInputChange($event)"
+      type="text"
+      [placeholder]="placeholder"
+    />
+  </mat-form-field>
+</section>

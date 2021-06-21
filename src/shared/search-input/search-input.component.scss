@@ -1,0 +1,18 @@
+:host ::ng-deep section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1.4rem;
+
+  mat-icon {
+    font-size: 2rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  mat-form-field {
+    mat-icon {
+      margin-bottom: -1rem;
+    }
+  }
+}
