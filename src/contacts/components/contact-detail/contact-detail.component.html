@@ -1,0 +1,40 @@
+<button mat-icon-button (click)="goBack()">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+<section *ngIf="contact$ | async as contact; else contactLoadingTemplate">
+  <div class="card">
+    <img [src]="contact.imageUrl" width="128px" height="128px" />
+    <h1>{{ contact.firstName }} {{ contact.lastName }}</h1>
+    <div class="details">
+      <div class="row">
+        <span>Phone</span><span>{{ contact.phone }}</span>
+      </div>
+      <div class="row">
+        <span>Cell</span><span>{{ contact.cell }}</span>
+      </div>
+      <div class="row">
+        <span>Email</span><span>{{ contact.email }}</span>
+      </div>
+      <div class="row">
+        <span>Street</span><span>{{ contact.street }}</span>
+      </div>
+      <div class="row">
+        <span>City</span><span>{{ contact.city }}</span>
+      </div>
+      <div class="row">
+        <span>State</span><span>{{ contact.state }}</span>
+      </div>
+      <div class="row">
+        <span>Country</span><span>{{ contact.country }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #contactLoadingTemplate>
+  <section *ngIf="loadingContact$ | async; else contactIssueTemplate">
+    Loading
+  </section>
+</ng-template>
+
+<ng-template #contactIssueTemplate> Oh, no. Something went wrong! </ng-template>
