@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-root',
+  styleUrls: ['./app.component.scss'],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'address-book';
+  title = 'Address Book';
+
+  constructor(private readonly _router: Router) {}
+
+  goToContacts() {
+    this._router.navigate(['/contacts']);
+  }
 }
